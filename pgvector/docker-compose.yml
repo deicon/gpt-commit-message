@@ -1,0 +1,17 @@
+
+services:
+  pgvector-db:
+    env_file:
+      - ./postgres-pgvector/.env
+    image: pgvector/pgvector:pg16
+    container_name: postgres-pgvector
+    ports:
+      - "5454:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./postgres:/docker-entrypoint-initdb.d/
+    networks:
+      - default
+
+volumes:
+  db_data:
